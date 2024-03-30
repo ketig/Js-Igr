@@ -157,11 +157,48 @@ function CalculateDiscount() {
 // აჩვენეთ დილა მშვიდობისა, შუადღე მშვიდობისა ან
 // საღამო მშვიდობისა, დღის იმ დროის მიხედვით,
 // როდესაც თქვენ აწარმოებთ კოდს.
+CheckTime();
+
 function CheckTime() {
-    // current time in js
+    let objDate = new Date();
+    let hours = objDate.getHours();
+    let message = "Hello";
+
+    if (hours < 12 && hours >= 6) {
+        message = "Good Morning!";
+    } else if(hours < 18 && hours  >= 12){
+        message = "Good Afternoon!";
+    } else if(hours < 24 && hours  >= 18){
+        message = "Good Evening!";
+    }
+    sleep(200).then(() => {
+        document.getElementById("hello").value = message;
+    });
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // დაწერეთ რიცხვების გამოცნობის მარტივი თამაში.
-// მიუთითეთ საიდუმლო რენდომული რიცხვი 1 - 20 შუალედში.
+// მიუთითეთ საიდუმლო რენდომული რიცხვი 
+// 1 - 20 შუალედში.
 // მოთამაშეს დაუწერეთ მათი გამოცნობილი რიცხვი
 // უფრო მაღალია თუ უფრო  დაბალი თუ სწორი.
+let randomNumb = Math.ceil(Math.random() * 20);
+
+function checkNumber() {
+    let userNumb = document.getElementById("userNumber").value;
+    let message = "";
+
+    // userNumb შეადარეთ randomNumb
+    if (userNumb == randomNumb) {
+        message = "The number is correct";
+    } else if(userNumb < randomNumb){
+        message = "The number is less";
+    } else {
+        message = "The number is higher";
+    }
+
+    document.getElementById("message").value = message;
+}
